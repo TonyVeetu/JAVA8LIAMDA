@@ -31,14 +31,18 @@ public class Album {
         return songs.stream();
     }
 
-    public static int AddUp(Stream<Integer> numbers) {
-        return numbers.reduce(0, (acc, x) -> acc + x);
-    }
-
+    /** Chapter3. Task 1.c */
     public static List<Album> getAlbumsWithAtMostThreeTracks(List<Album> input) {
         return input.stream()
                 .filter(album -> album.getCountOfSongs() <= 3)
                 .collect(toList());
+    }
+    /** Chapter3. Task 1.b */
+    public static List<String> getNamesAndOrigins(List<Artist> artists) {
+        return artists.stream()
+                .flatMap(artist -> Stream.of(artist.getName(), artist.getNationality()))
+                .collect(toList());
+
     }
 
     public static Song getMostLongSong(List<Album> input) {
@@ -61,7 +65,7 @@ public class Album {
     }
 
     public static void main(String[] args) {
-        List<Artist> artists = Stream.of(new Artist("Anton", 30),new Artist("Max", 25))
+        List<Artist> artists = Stream.of(new Artist("Anton", 30, "RUS"),new Artist("Max", 25, "ENG"))
                                      .collect(toList());
         List<Song> songs1 = Stream.of(new Song("a",12L), new Song("b", 45L), new Song("c", 34L))
                                  .collect(toList());
@@ -88,15 +92,15 @@ public class Album {
         allAboutArtist.stream()
                 .forEach(value -> System.out.println(value));
 
-        List<Artist> artists1 = Stream.of(new Artist("A", 30),new Artist("V", 25))
+        List<Artist> artists1 = Stream.of(new Artist("A", 30, "RUS"),new Artist("V", 25, "ENG"))
                 .collect(toList());
-        List<Artist> artists2 = Stream.of(new Artist("R", 30),new Artist("D", 25))
+        List<Artist> artists2 = Stream.of(new Artist("R", 30, "GER"),new Artist("D", 25, "FRAN"))
                 .collect(toList());
 
-        List<Artist> list = Stream.of( ( new Artist("T", 21)), ( new Artist("L",24) ))
+        List<Artist> list = Stream.of( ( new Artist("T", 21, "TURK")), ( new Artist("L",24, "BELG") ))
                                 .collect(toList());
         Artist a4 = new Artist(list);
-        List<Artist> artists3 = Stream.of(a4,new Artist("S", 25))
+        List<Artist> artists3 = Stream.of(a4,new Artist("S", 25, "POL"))
                 .collect(toList());
 
         long a = getCountOfArtist(artists3);
@@ -104,11 +108,4 @@ public class Album {
 
     }
 
-    public static void main1(String[] args) {
-        List<Integer> ints = Stream.of(1,2,3,4,5)
-                                   .collect(toList());
-        int sym = AddUp(ints.stream());
-        System.out.println(sym);
-
-    }
 }

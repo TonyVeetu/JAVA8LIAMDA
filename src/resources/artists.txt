@@ -1,0 +1,3 @@
+Anton, 20, RUS
+Max, 24, GER
+Mixail, 23, POl
