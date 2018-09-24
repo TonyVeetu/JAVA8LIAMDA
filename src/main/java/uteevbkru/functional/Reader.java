@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class Reader {
     private  static String FILE_NAME = "./src/resources/artists.txt";
 
     public static void main(String[] args) {
-        List<Artist> artists = initArtist();
+        List<List<Artist>> artists = initArtist();
         artists.stream()
-                .map(artist -> artist.toString())
+                .flatMap(artist -> artist.stream())
                 .forEach(System.out::println);
     }
 
@@ -31,25 +32,38 @@ public class Reader {
         }
     }
 
-    public static List<Artist> initArtist(){
+    public static List<List<Artist>> initArtist(){
         List<String> strings = new ArrayList<>();
         strings.addAll(readFromFile());
 
-        List<Artist> artists = new ArrayList<>();
+        List<List<Artist>> artists = new ArrayList<>();
         for(int i = 0; i < strings.size(); i++) {
-            artists.add(makeArtist(strings.get(i)));
+            artists.add(workWithLine(strings.get(i)));
         }
         return artists;
     }
 
 
-    public static Artist makeArtist(String string){
+    public static List<Artist> workWithLine(String string){
+        List<Artist> list = new ArrayList<>();
+        String []artistsInString = string.split(";");
+        if (artistsInString.length > 1) {
+            for (int i = 0; i < artistsInString.length; i++) {
+                makeArtist(list, artistsInString[i]);
+            }
+        } else {
+            makeArtist(list,string);
+        }
+        return list;
+    }
+
+    public static void makeArtist(List<Artist> list, String string) {
         String []parameters = string.split(",");
         String name = parameters[0].trim();
         String age = parameters[1].trim();
         String nationality = parameters[2].trim();
 
-        return new Artist(name, age, nationality);
+        list.add(new Artist(name, age, nationality));
     }
 
 }

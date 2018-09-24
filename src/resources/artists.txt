@@ -1,3 +1,4 @@
 Anton, 20, RUS
 Max, 24, GER
 Mixail, 23, POl
+Alan, 22, GER; Sur, 34, Jap; Gron, 43, NID

@@ -23,6 +23,11 @@ public class Album {
         this.date = date;
     }
 
+    public Album(String name, String date) {
+        this.name = name;
+        this.date = date;
+    }
+
     public int getCountOfSongs() {
         return songs.size();
     }
@@ -65,7 +70,7 @@ public class Album {
     }
 
     public static void main(String[] args) {
-        List<Artist> artists = Stream.of(new Artist("Anton", 30, "RUS"),new Artist("Max", 25, "ENG"))
+        List<Artist> artists = Stream.of(new Artist("Anton", "30", "RUS"),new Artist("Max", "25", "ENG"))
                                      .collect(toList());
         List<Song> songs1 = Stream.of(new Song("a",12L), new Song("b", 45L), new Song("c", 34L))
                                  .collect(toList());
@@ -92,15 +97,15 @@ public class Album {
         allAboutArtist.stream()
                 .forEach(value -> System.out.println(value));
 
-        List<Artist> artists1 = Stream.of(new Artist("A", 30, "RUS"),new Artist("V", 25, "ENG"))
+        List<Artist> artists1 = Stream.of(new Artist("A", "30", "RUS"),new Artist("V", "25", "ENG"))
                 .collect(toList());
-        List<Artist> artists2 = Stream.of(new Artist("R", 30, "GER"),new Artist("D", 25, "FRAN"))
+        List<Artist> artists2 = Stream.of(new Artist("R", "30", "GER"),new Artist("D", "25", "FRAN"))
                 .collect(toList());
 
-        List<Artist> list = Stream.of( ( new Artist("T", 21, "TURK")), ( new Artist("L",24, "BELG") ))
+        List<Artist> list = Stream.of( ( new Artist("T", "21", "TURK")), ( new Artist("L","24", "BELG") ))
                                 .collect(toList());
         Artist a4 = new Artist(list);
-        List<Artist> artists3 = Stream.of(a4,new Artist("S", 25, "POL"))
+        List<Artist> artists3 = Stream.of(a4,new Artist("S", "25", "POL"))
                 .collect(toList());
 
         long a = getCountOfArtist(artists3);

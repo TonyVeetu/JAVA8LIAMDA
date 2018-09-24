@@ -23,6 +23,9 @@ public class Chapter3 {
 
         /** 1.c In class Album */
 
+        /** 2 Итерирование */
+
+
 
     }
 }
