@@ -1,21 +1,40 @@
 package uteevbkru.struct;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
+
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 /**
  *  Артист может быть один, а может быть несколько!
  */
 public class Artist {
+    private Artist self;
     private String name;
     private int age;
+    private String ageString;
+    private String nationality;
     private List<Artist> artists;
 
-    public Artist(String name, int age) {
+    public Artist(String name, int age, String nationality) {
         this.name = name;
         this.age = age;
-        artists = new ArrayList<>();
+        this.nationality = nationality;
+        self = this;
+        System.out.println(self.getName());
     }
+
+    public Artist(String name, String age, String nationality) {
+        this.name = name;
+        ageString = age;
+        this.nationality = nationality;
+        self = this;
+    }
+
+
 
     public Artist(List<Artist> artists) {
         this.artists = artists;
@@ -30,6 +49,27 @@ public class Artist {
     }
 
     public List<Artist> getMembers() {
-        return artists;
+        if (artists == null) {
+            return artists;
+        } else {
+            artists = new ArrayList<>();
+            artists.add(self);
+            return artists;
+        }
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", ageString='" + ageString + '\'' +
+                ", nationality='" + nationality + '\'' +
+                '}';
     }
 }
