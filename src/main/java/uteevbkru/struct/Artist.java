@@ -54,4 +54,15 @@ public class Artist {
                 ", nationality='" + nationality + '\'' +
                 '}';
     }
+
+    public static int getCountOfArtists1(List<Artist> artists){
+        return artists.stream()
+                .map(artist -> artist.getMembers().size())
+                .reduce(0, Integer::sum)
+                .intValue();
+    }
+
+    public static int getCountOfArtists2(List<Artist> artists) {
+        return (int) artists.stream().flatMap(artist -> artist.getMembers().stream()).count();
+    }
 }

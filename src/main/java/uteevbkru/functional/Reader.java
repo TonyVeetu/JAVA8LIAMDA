@@ -19,6 +19,10 @@ public class Reader {
         artists.stream()
                 .flatMap(artist -> artist.getMembers().stream())
                 .forEach(System.out::println);
+
+        int count1 = Artist.getCountOfArtists1(artists);
+        int count2 = Artist.getCountOfArtists2(artists);
+        System.out.println(count1+", "+count2);
     }
 
     public static List<String> readFromFile(String file){
@@ -42,7 +46,8 @@ public class Reader {
         return artists;
     }
 
-    /** Если арстист состоит из нескольких, то он должен создаваться другим образом, через список!! */
+    /** ! Если арстист состоит из нескольких,
+     * то он должен создаваться другим образом, через список!! */
     public static Artist workWithLine(String string){
         Artist artist;
         List<Artist> list = new ArrayList<>();
@@ -63,7 +68,6 @@ public class Reader {
         String name = parameters[0].trim();
         String age = parameters[1].trim();
         String nationality = parameters[2].trim();
-        System.out.println(name+", "+age+", "+nationality);
         return new Artist(name, age, nationality);
     }
 
