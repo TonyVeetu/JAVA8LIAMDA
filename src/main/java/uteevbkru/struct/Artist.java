@@ -2,6 +2,8 @@ package uteevbkru.struct;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  *  Артист может быть один, а может быть несколько!
@@ -64,5 +66,9 @@ public class Artist {
 
     public static int getCountOfArtists2(List<Artist> artists) {
         return (int) artists.stream().flatMap(artist -> artist.getMembers().stream()).count();
+    }
+
+    public Optional<Artist> getArtist(int index) {
+        return Optional.of(artists.get(index));
     }
 }
